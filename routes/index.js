@@ -24,7 +24,7 @@ oauth2Client.setCredentials({
 });
 
 const Youtube = google.youtube({ version: "v3", auth: oauth2Client });
-
+let videoStream;
 handlebars.registerHelper("video-list", function (items, options) {
   var out = "";
   for (var i = 0, l = items.length; i < l; i++) {
@@ -32,8 +32,6 @@ handlebars.registerHelper("video-list", function (items, options) {
   }
   return out;
 });
-
-var videoStream = new Buffer();
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -110,7 +108,7 @@ router.get("/load", (req, res, next) => {
   }
 });
 
-router.get("/video", async (req, res, next) => {
+router.get("/video/:id", async (req, res, next) => {
   const range = req.headers.range;
   if (!range) {
     res.status(400).send("Requires Range Header");

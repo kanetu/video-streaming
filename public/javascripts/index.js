@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
   videoElement.setAttribute("src", "kane"); // empty source
   videoElement.load();
   setTimeout(() => {
-    videoElement.setAttribute("src", "/video");
+    videoElement.setAttribute("src", `/video/${Date.now()}`);
     videoElement.load();
   }, 3000);
 });
